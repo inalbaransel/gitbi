@@ -1,0 +1,29 @@
+/* Infinite Menu Core Styles */
+
+#infinite-grid-menu-canvas {
+  cursor: grab;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  outline: none;
+}
+
+#infinite-grid-menu-canvas:active {
+  cursor: grabbing;
+}
+
+/* 
+   Note: All layout for text is now handled via Tailwind classes in the TSX 
+   to keep it dynamic and consistent with the rest of the app's design system.
+*/
+
+/* Custom cubic-bezier for more premium feeling transitions */
+.cubic-bezier\(0\.19\,\ 1\,\ 0\.22\,\ 1\) {
+  transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+@media (max-width: 768px) {
+  /* Smaller adjustments for mobile if needed, 
+     though Tailwind's md: prefix handles most of it */
+}
