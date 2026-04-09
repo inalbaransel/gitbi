@@ -1,24 +1,22 @@
-'use client';
-import React, { useEffect } from 'react';
+"use client"
+import React, { useEffect } from "react"
 
-import About from '@/components/about/about';
-import AsciiLogger from '@/components/ASCII/ASCIIlog';
-import { FaqList } from '@/components/faq/faq-list';
-import Gallery from '@/components/gallery/gallery';
-import Hero from '@/components/hero/hero';
-// import Prizes from '@/components/prizes/prizes';
-// import { Sponsors } from '@/components/sponsors/sponsors';
-import Stats from '@/components/stats/stats';
-import Testimonials from '@/components/testimonials/testimonials';
-import { Timeline } from '@/components/timeline/timeline';
-import ScrollMarquee from '@/components/ui/marquee';
+import About from "@/components/about/about"
+import AsciiLogger from "@/components/ASCII/ASCIIlog"
+import { FaqList } from "@/components/faq/faq-list"
+import Gallery from "@/components/gallery/gallery"
+import Hero from "@/components/hero/hero"
+import Stats from "@/components/stats/stats"
+import Testimonials from "@/components/testimonials/testimonials"
+import { Timeline } from "@/components/timeline/timeline"
+import ScrollMarquee from "@/components/ui/marquee"
 
 export default function Home() {
   useEffect(() => {
-    fetch('/api/clue')
+    fetch("/api/clue")
       .then((res) => res.json())
-      .then(() => console.warn('help me pleaseee!'));
-  }, []);
+      .then(() => console.warn("help me pleaseee!"))
+  }, [])
 
   return (
     <>
@@ -29,15 +27,9 @@ export default function Home() {
         <Gallery />
       </div>
       <ScrollMarquee />
-
-      {/* <Prizes />
-      <ScrollMarquee /> */}
       <Timeline />
 
       <div className="bg-on-black">
-        {/* <Sponsors />
-        <ScrollMarquee /> */}
-        
         <Testimonials />
         <div className="py-20">
           <ScrollMarquee />
@@ -47,5 +39,5 @@ export default function Home() {
       <ScrollMarquee />
       <AsciiLogger />
     </>
-  );
+  )
 }

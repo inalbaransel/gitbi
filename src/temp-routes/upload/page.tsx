@@ -1,6 +1,6 @@
-'use client';
+"use client"
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from "react"
 
 import {
   AlertCircle,
@@ -12,53 +12,53 @@ import {
   Info,
   Trash2,
   Upload,
-} from 'lucide-react';
+} from "lucide-react"
 
 interface CloudinaryUploadResult {
-  event: string;
+  event: string
   info: {
-    public_id: string;
-    secure_url: string;
-    url: string;
-    original_filename: string;
-    format: string;
-    width: number;
-    height: number;
-    bytes: number;
-    created_at: string;
-  };
+    public_id: string
+    secure_url: string
+    url: string
+    original_filename: string
+    format: string
+    width: number
+    height: number
+    bytes: number
+    created_at: string
+  }
 }
 
 interface UploadedImage {
-  public_id: string;
-  secure_url: string;
-  original_filename: string;
-  format: string;
-  width: number;
-  height: number;
-  bytes: number;
-  created_at: string;
+  public_id: string
+  secure_url: string
+  original_filename: string
+  format: string
+  width: number
+  height: number
+  bytes: number
+  created_at: string
 }
 
 declare global {
   interface Window {
-    cloudinary: any;
+    cloudinary: any
   }
 }
 
 export default function UploadPage() {
-  const [uploadedImages, setUploadedImages] = useState<UploadedImage[]>([]);
-  const [error, setError] = useState<string | null>(null);
-  const [copiedUrl, setCopiedUrl] = useState<string | null>(null);
+  const [uploadedImages, setUploadedImages] = useState<UploadedImage[]>([])
+  const [error, setError] = useState<string | null>(null)
+  const [copiedUrl, setCopiedUrl] = useState<string | null>(null)
 
   useEffect(() => {
     if (!window.cloudinary) {
-      const script = document.createElement('script');
-      script.src = 'https://upload-widget.cloudinary.com/global/all.js';
-      script.async = true;
-      document.body.appendChild(script);
+      const script = document.createElement("script")
+      script.src = "https://upload-widget.cloudinary.com/global/all.js"
+      script.async = true
+      document.body.appendChild(script)
     }
-  }, []);
+  }, [])
 
   const handleUploadSuccess = useCallback((result: CloudinaryUploadResult) => {
     setUploadedImages((prev) => [
@@ -73,29 +73,29 @@ export default function UploadPage() {
         bytes: result.info.bytes,
         created_at: result.info.created_at,
       },
-    ]);
-  }, []);
+    ])
+  }, [])
 
   const handleUploadError = useCallback((error: any) => {
-    setError(`Upload failed: ${error.message || 'Unknown error'}`);
-  }, []);
+    setError(`Upload failed: ${error.message || "Unknown error"}`)
+  }, [])
 
   const openUploadWidget = useCallback(() => {
-    setError(null);
+    setError(null)
 
     if (!window.cloudinary) {
-      setError('Cloudinary widget is not loaded yet. Please try again.');
-      return;
+      setError("Cloudinary widget is not loaded yet. Please try again.")
+      return
     }
 
-    const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
-    const uploadPreset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
+    const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME
+    const uploadPreset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET
 
     if (!cloudName || !uploadPreset) {
       setError(
-        'Cloudinary configuration is missing. Please check your environment variables.'
-      );
-      return;
+        "Cloudinary configuration is missing. Please check your environment variables.",
+      )
+      return
     }
 
     const widget = window.cloudinary.createUploadWidget(
@@ -105,68 +105,68 @@ export default function UploadPage() {
         multiple: true,
         maxFiles: 10,
         maxFileSize: 10000000, // 10MB
-        clientAllowedFormats: ['jpeg', 'jpg', 'png', 'gif', 'webp'],
-        folder: 'uploads',
-        sources: ['local', 'url', 'camera'],
+        clientAllowedFormats: ["jpeg", "jpg", "png", "gif", "webp"],
+        folder: "uploads",
+        sources: ["local", "url", "camera"],
         showAdvancedOptions: false,
         cropping: false,
         showSkipCropButton: true,
         croppingAspectRatio: null,
-        theme: 'minimal',
+        theme: "minimal",
         styles: {
           palette: {
-            window: '#ffffff',
-            windowBorder: '#e5e7eb',
-            tabIcon: '#3b82f6',
-            menuIcons: '#6b7280',
-            textDark: '#111827',
-            textLight: '#ffffff',
-            link: '#3b82f6',
-            action: '#2563eb',
-            inactiveTabIcon: '#9ca3af',
-            error: '#ef4444',
-            inProgress: '#3b82f6',
-            complete: '#10b981',
-            sourceBg: '#f9fafb',
+            window: "#ffffff",
+            windowBorder: "#e5e7eb",
+            tabIcon: "#3b82f6",
+            menuIcons: "#6b7280",
+            textDark: "#111827",
+            textLight: "#ffffff",
+            link: "#3b82f6",
+            action: "#2563eb",
+            inactiveTabIcon: "#9ca3af",
+            error: "#ef4444",
+            inProgress: "#3b82f6",
+            complete: "#10b981",
+            sourceBg: "#f9fafb",
           },
         },
       },
       (error: any, result: CloudinaryUploadResult) => {
-        if (!error && result && result.event === 'success') {
-          handleUploadSuccess(result);
+        if (!error && result && result.event === "success") {
+          handleUploadSuccess(result)
         }
 
         if (error) {
-          handleUploadError(error);
+          handleUploadError(error)
         }
-      }
-    );
+      },
+    )
 
-    widget.open();
-  }, [handleUploadSuccess, handleUploadError]);
+    widget.open()
+  }, [handleUploadSuccess, handleUploadError])
 
   const clearUploads = useCallback(() => {
-    setUploadedImages([]);
-    setError(null);
-  }, []);
+    setUploadedImages([])
+    setError(null)
+  }, [])
 
   const copyToClipboard = useCallback(async (url: string) => {
     try {
-      await navigator.clipboard.writeText(url);
-      setCopiedUrl(url);
-      setTimeout(() => setCopiedUrl(null), 2000);
+      await navigator.clipboard.writeText(url)
+      setCopiedUrl(url)
+      setTimeout(() => setCopiedUrl(null), 2000)
     } catch (err) {
-      console.error('Failed to copy to clipboard:', err);
+      console.error("Failed to copy to clipboard:", err)
     }
-  }, []);
+  }, [])
 
   const formatFileSize = useCallback((bytes: number) => {
-    if (bytes === 0) return '0 Bytes';
-    const k = 1024;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-  }, []);
+    if (bytes === 0) return "0 Bytes"
+    const k = 1024
+    const sizes = ["Bytes", "KB", "MB", "GB"]
+    const i = Math.floor(Math.log(bytes) / Math.log(k))
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i]
+  }, [])
 
   return (
     <div className=" bg-gray-50">
@@ -298,8 +298,8 @@ export default function UploadPage() {
                             onClick={() => copyToClipboard(image.secure_url)}
                             className={`flex items-center space-x-1 px-3 py-2 rounded text-sm font-medium border ${
                               copiedUrl === image.secure_url
-                                ? 'bg-green-50 text-green-700 border-green-200'
-                                : 'bg-gray-50 hover:bg-gray-100 text-gray-700 border-gray-200'
+                                ? "bg-green-50 text-green-700 border-green-200"
+                                : "bg-gray-50 hover:bg-gray-100 text-gray-700 border-gray-200"
                             }`}
                           >
                             {copiedUrl === image.secure_url ? (
@@ -309,14 +309,12 @@ export default function UploadPage() {
                             )}
                             <span>
                               {copiedUrl === image.secure_url
-                                ? 'Copied'
-                                : 'Copy'}
+                                ? "Copied"
+                                : "Copy"}
                             </span>
                           </button>
                           <a
                             href={image.secure_url}
-                            target="_blank"
-                            rel="noopener noreferrer"
                             className="flex items-center space-x-1 bg-blue-50 hover:bg-blue-100 text-blue-700 px-3 py-2 rounded text-sm font-medium border border-blue-200"
                           >
                             <ExternalLink className="w-4 h-4" />
@@ -367,5 +365,5 @@ export default function UploadPage() {
         </div>
       </div>
     </div>
-  );
+  )
 }

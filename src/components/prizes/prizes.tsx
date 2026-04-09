@@ -1,8 +1,8 @@
-'use client';
+"use client"
 
-import { useState } from 'react';
+import { useState } from "react"
 
-import Image from 'next/image';
+import Image from "next/image"
 
 import {
   firstPrize,
@@ -10,12 +10,12 @@ import {
   prizeheader,
   secondPrize,
   thirdPrize,
-} from '@/config/prizes';
+} from "@/config/prizes"
 
-import Typography from '../Typography';
+import Typography from "../Typography"
 
 export default function Prizes() {
-  const [isClicked, setIsClicked] = useState(false);
+  const [isClicked, setIsClicked] = useState(false)
 
   return (
     <section
@@ -57,7 +57,7 @@ export default function Prizes() {
         <div className="relative flex flex-col items-center justify-center flex-wrap group pt-20 px-5 transform transition duration-300 [@media(max-width:1050px)]:order-1 [@media(max-width:1050px)]:mx-[20%] [@media(max-width:600px)]:mx-[0%]  [@media(max-width:764px)]:-mt-5 [@media(max-width:500px)]:-mt- ">
           <div
             className={`absolute -translate-y-56 group-hover:-translate-y-60 duration-300 ${
-              isClicked ? '-translate-y-60' : ''
+              isClicked ? "-translate-y-60" : ""
             }`}
           >
             <Image
@@ -71,7 +71,7 @@ export default function Prizes() {
           </div>
           <div
             onClick={() => setIsClicked(!isClicked)}
-            className="z-10 flex flex-col items-center justify-center flex-wrap"
+            className="z-10 flex flex-col items-center justify-center flex-wrap cursor-pointer"
           >
             <Image
               src={firstPrize.image}
@@ -113,5 +113,5 @@ export default function Prizes() {
         </div>
       </div>
     </section>
-  );
+  )
 }

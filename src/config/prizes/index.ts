@@ -2,30 +2,30 @@
 
 export const firstPrize = {
   image:
-    'https://res.cloudinary.com/dscnitrourkela/image/upload/v1756052111/hacknitr/ct8dpoxnd7wg8ligyzs0.png',
-  amount: '35k',
-  amtype: 'Cash Prize',
-  title: 'Winners',
-};
+    "https://res.cloudinary.com/dscnitrourkela/image/upload/v1756052111/hacknitr/ct8dpoxnd7wg8ligyzs0.png",
+  amount: "35k",
+  amtype: "Nakit Ödül",
+  title: "Kazananlar",
+}
 export const secondPrize = {
   image:
-    'https://res.cloudinary.com/dscnitrourkela/image/upload/v1756042800/hacknitr/vrx5o5hdtvy1hqgz6dds.png',
-  amount: '25k',
-  amtype: 'Cash Prize',
-  title: '1st Runners up',
-};
+    "https://res.cloudinary.com/dscnitrourkela/image/upload/v1756042800/hacknitr/vrx5o5hdtvy1hqgz6dds.png",
+  amount: "25k",
+  amtype: "Nakit Ödül",
+  title: "2. Olan Takım",
+}
 export const thirdPrize = {
   image:
-    'https://res.cloudinary.com/dscnitrourkela/image/upload/v1756042800/hacknitr/vgciny30li62ruv27m0d.png',
-  amount: '15k',
-  amtype: 'Cash Prize',
-  title: '2nd Runners up',
-};
+    "https://res.cloudinary.com/dscnitrourkela/image/upload/v1756042800/hacknitr/vgciny30li62ruv27m0d.png",
+  amount: "15k",
+  amtype: "Nakit Ödül",
+  title: "3. Olan Takım",
+}
 export const firstxori = {
   image:
-    'https://res.cloudinary.com/dscnitrourkela/image/upload/v1756052950/hacknitr/ohoazbugjnrrcvm0bmzm.png',
-};
+    "https://res.cloudinary.com/dscnitrourkela/image/upload/v1756052950/hacknitr/ohoazbugjnrrcvm0bmzm.png",
+}
 export const prizeheader = {
-  image: '/pagebreak.svg',
-  title: 'PRIZES',
-};
+  image: "/pagebreak.svg",
+  title: "ÖDÜLLER",
+}

@@ -1,36 +1,35 @@
-'use client';
+"use client"
 
-import { Typography } from '@/components';
-import { brochures } from '@/config/brochure';
-import { Download, Eye } from 'lucide-react';
+import { Typography } from "@/components"
+import { brochures } from "@/config/brochure"
+import { Download, Eye } from "lucide-react"
 
 export default function BrochurePage() {
   const handleView = (url: string | null) => {
-    if (!url) return;
-    const viewUrl = url.includes('drive.google.com')
-      ? url.replace('/view', '/preview')
-      : url;
-    window.open(viewUrl, '_blank');
-  };
+    if (!url) return
+    const viewUrl = url.includes("drive.google.com")
+      ? url.replace("/view", "/preview")
+      : url
+    window.location.href = viewUrl
+  }
 
   const handleDownload = (url: string | null, title: string) => {
-    if (!url) return;
-    let downloadUrl = url;
-    if (url.includes('drive.google.com')) {
-      const fileIdMatch = url.match(/\/d\/([a-zA-Z0-9-_]+)/);
+    if (!url) return
+    let downloadUrl = url
+    if (url.includes("drive.google.com")) {
+      const fileIdMatch = url.match(/\/d\/([a-zA-Z0-9-_]+)/)
       if (fileIdMatch) {
-        downloadUrl = `https://drive.google.com/uc?export=download&id=${fileIdMatch[1]}`;
+        downloadUrl = `https://drive.google.com/uc?export=download&id=${fileIdMatch[1]}`
       }
     }
 
-    const link = document.createElement('a');
-    link.href = downloadUrl;
-    link.download = `${title.replace(/\s+/g, '_')}.pdf`;
-    link.target = '_blank';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
+    const link = document.createElement("a")
+    link.href = downloadUrl
+    link.download = `${title.replace(/\s+/g, "_")}.pdf`
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
 
   return (
     <main className="min-h-screen w-full flex flex-col bg-gray-50">
@@ -100,8 +99,8 @@ export default function BrochurePage() {
                     <iframe
                       src={
                         brochure.pdfUrl &&
-                        brochure.pdfUrl.includes('drive.google.com')
-                          ? brochure.pdfUrl.replace('/view', '/preview')
+                        brochure.pdfUrl.includes("drive.google.com")
+                          ? brochure.pdfUrl.replace("/view", "/preview")
                           : `${brochure.pdfUrl}#view=FitH&toolbar=0`
                       }
                       className="w-full h-full rounded-lg"
@@ -116,5 +115,5 @@ export default function BrochurePage() {
         </div>
       </div>
     </main>
-  );
+  )
 }

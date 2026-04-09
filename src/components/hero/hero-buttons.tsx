@@ -1,18 +1,18 @@
-'use client';
+"use client"
 
-import Image from 'next/image';
+import Image from "next/image"
 
-import Button from '@/components/ui/button';
-import { WHATSAPP_LINK, INSTAGRAM_LINK, DISCORD_LINK } from '@/config/marginals';
+import Button from "@/components/ui/button"
+import { WHATSAPP_LINK, INSTAGRAM_LINK, DISCORD_LINK } from "@/config/marginals"
 
-import Typography from '../Typography';
+import Typography from "../Typography"
 
-export function handleRedirect(type: 'whatsapp' | 'instagram' | 'discord') {
-  let dest = '';
-  if (type == 'whatsapp') dest = WHATSAPP_LINK;
-  else if (type == 'discord') dest = DISCORD_LINK;
-  else dest = INSTAGRAM_LINK;
-  window.open(dest, '_blank');
+export function handleRedirect(type: "whatsapp" | "instagram" | "discord") {
+  let dest = ""
+  if (type == "whatsapp") dest = WHATSAPP_LINK
+  else if (type == "discord") dest = DISCORD_LINK
+  else dest = INSTAGRAM_LINK
+  window.location.href = dest
 }
 export default function DevfolioAndDiscordButtons() {
   return (
@@ -21,16 +21,16 @@ export default function DevfolioAndDiscordButtons() {
     >
       <Button
         className={
-          'h-14  lg:h-20 xlg:h-14 xs:mb-0.5 !p-0 min-w-[320px] max-w-[400px] lg:!w-[400px]  my-auto flex flex-row items-center justify-center gap-4 '
+          "h-14  lg:h-20 xlg:h-14 xs:mb-0.5 !p-0 min-w-[320px] max-w-[400px] lg:!w-[400px]  my-auto flex flex-row items-center justify-center gap-4 "
         }
-        onClick={() => handleRedirect('whatsapp')}
+        onClick={() => handleRedirect("whatsapp")}
       >
         <Image
-          src={'./whatsapp.svg'}
-          alt={'WhatsApp'}
+          src={"./whatsapp.svg"}
+          alt={"WhatsApp"}
           width={100}
           height={100}
-          className={'size-7 block'}
+          className={"size-7 block"}
         />
 
         <Typography.P className="text-white !text-[1.10rem] md:!text-xl lg:!text-2xl font-semibold text-center mb-0">
@@ -40,16 +40,16 @@ export default function DevfolioAndDiscordButtons() {
 
       <Button
         className={
-          'h-20 xlg:h-14 mb-0.5 !p-0 min-w-[320px] xs:!min-w-20 mt-5 xs:mt-0  my-auto lg:flex flex-row items-center justify-center gap-2 hidden'
+          "h-20 xlg:h-14 mb-0.5 !p-0 min-w-[320px] xs:!min-w-20 mt-5 xs:mt-0  my-auto lg:flex flex-row items-center justify-center gap-2 hidden"
         }
-        onClick={() => handleRedirect('instagram')}
+        onClick={() => handleRedirect("instagram")}
       >
         <Image
-          src={'./instagram.svg'}
-          alt={'Instagram'}
+          src={"./instagram.svg"}
+          alt={"Instagram"}
           width={100}
           height={100}
-          className={'size-8 block'}
+          className={"size-8 block"}
         />
 
         <Typography.P className="text-white text-lg font-semibold text-center mb-0 xs:hidden">
@@ -57,5 +57,5 @@ export default function DevfolioAndDiscordButtons() {
         </Typography.P>
       </Button>
     </div>
-  );
+  )
 }

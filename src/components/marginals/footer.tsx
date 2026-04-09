@@ -1,18 +1,29 @@
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from "next/image"
+import Link from "next/link"
 
-import { Typography } from '@/components';
-import { FOOTER_TEXT, HERO_IMAGES, SOCIALS } from '@/config/marginals';
+import { Typography } from "@/components"
+import { FOOTER_TEXT, SOCIALS, navItems } from "@/config/marginals"
 
 export default function Footer() {
-  const leftSocials = SOCIALS.slice(0, 2);
-  const rightSocials = SOCIALS.slice(2);
+  const leftSocials = SOCIALS.slice(0, 2)
+  const rightSocials = SOCIALS.slice(2)
 
   return (
     <footer
       id="footer"
       className="relative w-full flex flex-col justify-end mt-24 md:mt-32 lg:mt-48 xl:mt-64"
     >
+      <div className="mt-4 mb-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 px-4">
+        {navItems.map((item) => (
+          <Link
+            key={item.name}
+            href={item.href}
+            className="text-sm sm:text-base font-prompt font-medium text-black/80 hover:text-black transition-colors"
+          >
+            {item.name}
+          </Link>
+        ))}
+      </div>
       {/* Desktop Social Links - Above Logo */}
       <div className="hidden lg:flex w-full justify-center items-center gap-[30vw]">
         {/* Left Socials */}
@@ -21,8 +32,6 @@ export default function Footer() {
             <Link
               key={social.name}
               href={social.href}
-              target="_blank"
-              rel="noopener noreferrer"
               className="flex items-center gap-2 text-black hover:opacity-75 transition-opacity"
             >
               <Image
@@ -45,8 +54,6 @@ export default function Footer() {
             <Link
               key={social.name}
               href={social.href}
-              target="_blank"
-              rel="noopener noreferrer"
               className="flex items-center gap-2 text-black hover:opacity-75 transition-opacity"
             >
               <Image
@@ -69,8 +76,6 @@ export default function Footer() {
           <Link
             key={social.name}
             href={social.href}
-            target="_blank"
-            rel="noopener noreferrer"
             className="flex items-center hover:opacity-75 transition-opacity"
           >
             <Image
@@ -106,7 +111,6 @@ export default function Footer() {
               B!
             </Typography.Display>
           </div>
-
         </div>
       </div>
 
@@ -115,5 +119,5 @@ export default function Footer() {
         {FOOTER_TEXT}
       </Typography.Lead>
     </footer>
-  );
+  )
 }

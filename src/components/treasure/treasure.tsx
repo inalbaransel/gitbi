@@ -1,63 +1,63 @@
-'use client';
+"use client"
 
-import { useEffect, useState } from 'react';
-import { motion } from 'motion/react';
-import confetti from 'canvas-confetti';
-import React from 'react';
-import Typography from '../Typography';
-import Button from '../ui/button';
+import { useEffect, useState } from "react"
+import { motion } from "motion/react"
+import confetti from "canvas-confetti"
+import React from "react"
+import Typography from "../Typography"
+import Button from "../ui/button"
 
-import { handleRedirect } from '../hero/hero-buttons';
-import Link from 'next/link';
+import { handleRedirect } from "../hero/hero-buttons"
+import Link from "next/link"
 
 export default function Treasure() {
-  const [isSuccess, setIsSuccess] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false)
 
   const handleSubmit = async (answer: string) => {
     try {
-      const response = await fetch('/api/solve', {
-        method: 'POST',
+      const response = await fetch("/api/solve", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ answer }),
-      });
+      })
 
-      const data = await response.json();
+      const data = await response.json()
 
       if (data.success) {
-        setIsSuccess(true);
+        setIsSuccess(true)
         confetti({
           particleCount: 100,
           spread: 70,
           origin: { y: 0.6 },
-        });
+        })
       } else {
-        alert("Not quite right! Keep trying, you're getting closer!");
+        alert("Tam olarak doğru değil. Denemeye devam et, çok yaklaştın!")
       }
     } catch (error) {
-      console.error('Error:', error);
-      alert('Something went wrong. Please try again.');
+      console.error("Error:", error)
+      alert("Bir şeyler ters gitti. Lütfen tekrar dene.")
     }
-  };
+  }
 
   useEffect(() => {
-    const answer = prompt('Enter your answer:');
+    const answer = prompt("Cevabını gir:")
     if (answer) {
-      handleSubmit(answer);
+      handleSubmit(answer)
     }
-  }, []);
+  }, [])
 
   if (!isSuccess) {
     return (
       <section className="flex min-h-screen items-center justify-center">
         <div className="mx-auto px-4 sm:px-6 lg:px-8">
           <Typography.H2 className="text-center font-wc-rough-trad text-2xl sm:text-3xl font-bold text-[#150BDE]">
-            Verifying your answer...
+            Cevabın doğrulanıyor...
           </Typography.H2>
         </div>
       </section>
-    );
+    )
   }
 
   return (
@@ -70,8 +70,8 @@ export default function Treasure() {
           className="flex flex-col items-center justify-center text-center"
         >
           <Typography.H1 className="mb-6 sm:mb-8 lg:mb-10 font-wc-rough-trad text-4xl xs:text-4xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#150BDE] max-w-[90vw] sm:max-w-[80vw] md:max-w-3xl">
-            <span className="block sm:inline">Congratulations</span>{' '}
-            <span className="block sm:inline">Explorer!</span>
+            <span className="block sm:inline">Tebrikler</span>{" "}
+            <span className="block sm:inline">Kaşif!</span>
           </Typography.H1>
 
           <motion.div
@@ -81,14 +81,13 @@ export default function Treasure() {
             className="mx-auto w-full max-w-3xl space-y-4 sm:space-y-6 px-4 sm:px-6"
           >
             <Typography.P className="text-base sm:text-lg md:text-xl text-gray-700 whitespace-pre-line">
-              The stars have led, the traffic spoke, yet secrets lie where
-              vaults don't choke. In whispered paths and hidden streams, unfold
-              the truth behind the scenes.
+              Yıldızlar yol gösterdi, ipuçları seni buraya getirdi. Şimdi perde
+              arkasındaki gerçeği görmeye hazırsın.
             </Typography.P>
 
             <Typography.P className="mb-8 sm:mb-10 lg:mb-12 text-base sm:text-lg md:text-xl text-gray-700">
-              Your journey begins — connect and explore, join our Discord to
-              unlock more!
+              Yolculuk şimdi başlıyor. Topluluğa katıl, daha fazlasını birlikte
+              keşfet!
             </Typography.P>
 
             <motion.div
@@ -99,22 +98,22 @@ export default function Treasure() {
             >
               <Button
                 className={
-                  'h-20 xlg:h-14 my-auto lg:flex flex-row items-center justify-center gap-2 hidden'
+                  "h-20 xlg:h-14 my-auto lg:flex flex-row items-center justify-center gap-2 hidden"
                 }
-                onClick={() => handleRedirect('discord')}
+                onClick={() => handleRedirect("discord")}
               >
                 <Typography.P className="text-white text-lg font-semibold text-center mb-0 ">
-                  Join the HackNITR Community
+                  Discord Topluluğuna Katıl
                 </Typography.P>
               </Button>
-              <Link href={'/'}>
+              <Link href={"/"}>
                 <Button
                   className={
-                    'h-20 xlg:h-14 my-auto lg:flex flex-row items-center justify-center gap-2 hidden'
+                    "h-20 xlg:h-14 my-auto lg:flex flex-row items-center justify-center gap-2 hidden"
                   }
                 >
                   <Typography.P className="text-white text-lg font-semibold text-center mb-0 ">
-                    Proceed to home!
+                    Ana Sayfaya Dön
                   </Typography.P>
                 </Button>
               </Link>
@@ -123,5 +122,5 @@ export default function Treasure() {
         </motion.div>
       </div>
     </section>
-  );
+  )
 }

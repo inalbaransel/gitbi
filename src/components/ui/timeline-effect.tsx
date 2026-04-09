@@ -1,66 +1,66 @@
-'use client';
-import React, { useEffect, useState } from 'react';
+"use client"
+import React, { useEffect, useState } from "react"
 
-import { motion, MotionValue, useTransform } from 'motion/react';
-import Image from 'next/image';
+import { motion, MotionValue, useTransform } from "motion/react"
+import Image from "next/image"
 
-import { svgs } from '@/config/timeline';
-import { cn } from '@/lib/utils';
+import { svgs } from "@/config/timeline"
+import { cn } from "@/lib/utils"
 
 const transition = {
   duration: 0,
-  ease: 'linear' as const,
-};
+  ease: "linear" as const,
+}
 
 export const TimelineEffect = ({
   pathLengths,
   className,
 }: {
-  pathLengths: MotionValue[];
-  className?: string;
+  pathLengths: MotionValue[]
+  className?: string
 }) => {
-  const { pencil: PencilIcon, robot: RobotIcon } = svgs;
+  const { pencil: PencilIcon, robot: RobotIcon } = svgs
 
-  const [isheight, setIsheight] = useState(0);
+  const [isheight, setIsheight] = useState(0)
 
-  const [pathElement, setPathElement] = useState<SVGPathElement | null>(null);
+  const [pathElement, setPathElement] = useState<SVGPathElement | null>(null)
 
   useEffect(() => {
     const checkHeight = () => {
-      setIsheight(window.innerHeight);
-    };
+      setIsheight(window.innerHeight)
+    }
 
-    checkHeight();
+    checkHeight()
 
-    window.addEventListener('resize', checkHeight);
-    return () => window.removeEventListener('resize', checkHeight);
-  }, []);
+    window.addEventListener("resize", checkHeight)
+    return () => window.removeEventListener("resize", checkHeight)
+  }, [])
 
-  const pathProgress = useTransform(pathLengths[0], [0, 1], [0, 1]);
+  const pathProgress = useTransform(pathLengths[0], [0, 1], [0, 1])
 
   const getPointAtLength = (progress: number) => {
-    if (!pathElement) return { x: 9, y: 4 }; // Start position
+    if (!pathElement) return { x: 9, y: 4 } // Start position
 
-    const pathLength = pathElement.getTotalLength();
-    const point = pathElement.getPointAtLength(pathLength * progress);
-    return point;
-  };
+    const pathLength = pathElement.getTotalLength()
+    const point = pathElement.getPointAtLength(pathLength * progress)
+    return point
+  }
 
   const tipX = useTransform(pathProgress, (progress) => {
-    const point = getPointAtLength(progress);
-    return point.x;
-  });
+    const point = getPointAtLength(progress)
+    return point.x
+  })
 
   const tipY = useTransform(pathProgress, (progress) => {
-    const point = getPointAtLength(progress);
-    return point.y;
-  });
+    const point = getPointAtLength(progress)
+    return point.y
+  })
 
   return (
     <div
       className={cn(
-        'relative mx-20 lg:top-32 xlg:top-36 xl:top-44 2xl:top-60 xl:mx-40 ',
-        className
+        "relative mx-20 lg:top-32 xlg:top-36 xl:top-44 2xl:top-60 xl:mx-40 ",
+        className,
       )}
     >
       <Image
@@ -78,10 +78,10 @@ export const TimelineEffect = ({
         height={0}
         width={0}
         className={cn(
-          'absolute lg:h-60 lg:w-40 xl:w-50 xl:h-76',
-          'lg:top-[42vw] xlg:top-[48vw] xl:top-[44vw] 2xl:top-[50vw]  ',
-          'lg:-right-[7%] xl:-right-[14%] 2xl:-right-[7%] ',
-          isheight > 800 && isheight < 1064 ? 'xl:-right-[6%]' : ''
+          "absolute lg:h-60 lg:w-40 xl:w-50 xl:h-76",
+          "lg:top-[42vw] xlg:top-[48vw] xl:top-[44vw] 2xl:top-[50vw]  ",
+          "lg:-right-[7%] xl:-right-[14%] 2xl:-right-[7%] ",
+          isheight > 800 && isheight < 1064 ? "xl:-right-[6%]" : "",
         )}
       />
 
@@ -123,7 +123,7 @@ export const TimelineEffect = ({
           style={{
             x: tipX,
             y: tipY,
-            transformOrigin: 'center',
+            transformOrigin: "center",
           }}
           initial={{ scale: 0, opacity: 0 }}
           animate={{
@@ -134,7 +134,7 @@ export const TimelineEffect = ({
         >
           <foreignObject x="-40" y="-40" width="80" height="80">
             <Image
-              src="/logo.png"
+              src="/favicon.png"
               alt="Logo"
               width={80}
               height={80}
@@ -165,5 +165,5 @@ export const TimelineEffect = ({
         </defs>
       </svg>
     </div>
-  );
-};
+  )
+}

@@ -1,11 +1,11 @@
-@import 'tailwindcss';
-@import 'tw-animate-css';
+@import "tailwindcss";
+@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
 :root {
   /*Background Image*/
-  --bg-img: url('https://res.cloudinary.com/dscnitrourkela/image/upload/v1756245870/hacknitr/o31lzgdhnrkyvfbwwg33.png');
+  --bg-img: url("https://res.cloudinary.com/dscnitrourkela/image/upload/v1756245870/hacknitr/o31lzgdhnrkyvfbwwg33.png");
 
   /* Background Colors */
   --color-background: #ffffff;
@@ -157,8 +157,19 @@ body {
   scroll-behavior: smooth;
 }
 
+button:not(:disabled),
+a[href],
+[role="button"],
+summary,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+label[for] {
+  cursor: pointer;
+}
+
 body::before {
-  content: '';
+  content: "";
   position: fixed;
   top: 0;
   left: 0;

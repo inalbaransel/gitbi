@@ -1,10 +1,10 @@
-import './globals.css';
+import "./globals.css"
 
-import type { Metadata } from 'next';
-import Script from 'next/script';
+import type { Metadata } from "next"
+import Script from "next/script"
 
-import HOC from '@/components/hoc/hoc';
-import { metaDataObject } from '@/config/seo';
+import HOC from "@/components/hoc/hoc"
+import { metaDataObject } from "@/config/seo"
 import {
   avertaStd,
   cabinSketch,
@@ -12,18 +12,21 @@ import {
   museo,
   sketchBlock,
   wcRoughTrad,
-} from '@/fonts';
+} from "@/fonts"
 
-export const metadata = metaDataObject as Metadata;
+export const metadata = metaDataObject as Metadata
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="en">
       <head>
+        <link rel="icon" href="/favicon.png" type="image/png" sizes="any" />
+        <link rel="shortcut icon" href="/favicon.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/favicon.png" />
         <Script
           async
           src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GOOGLE_ANALYTICS_MEASUREMENT_ID}`}
@@ -45,5 +48,5 @@ export default function RootLayout({
         <HOC>{children}</HOC>
       </body>
     </html>
-  );
+  )
 }

@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react"
 
-import { Typography } from '@/components';
-import { Dropdown } from '@/components/faq/dropdown';
-import { questions } from '@/config/faq';
+import { Typography } from "@/components"
+import { Dropdown } from "@/components/faq/dropdown"
+import { questions } from "@/config/faq"
 
 export const FaqList: React.FC = () => {
   return (
@@ -24,7 +24,7 @@ export const FaqList: React.FC = () => {
         {/* Centered FAQ Title */}
         <div className="flex items-center justify-center p-8 w-full text-center">
           <Typography.H1 className=" font-normal font-wc-rough-trad text-[#f2f3f7] text-[clamp(3.5rem,5vw,6rem)]">
-            FAQ's
+            SSS
           </Typography.H1>
         </div>
       </div>
@@ -42,5 +42,5 @@ export const FaqList: React.FC = () => {
         ))}
       </div>
     </section>
-  );
-};
+  )
+}
